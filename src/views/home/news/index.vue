@@ -1,5 +1,5 @@
 <template>
-  <div class="news">
+  <div class="news" ref="news">
     <div class="container">
       <div class="header">
         <div class="header_left">
@@ -53,7 +53,10 @@ import { onMounted, ref } from "vue";
 import { useStore, mapState } from "vuex";
 import Skeleton from "@/components/Skeleton/index";
 
-const store = new useStore();
+import { useLazyData } from "@/hooks/index";
+
+const store = useStore();
+const news = ref(null);
 
 const props = defineProps({
   title: {
@@ -76,10 +79,10 @@ const props = defineProps({
 const list = ref([]);
 onMounted(() => {
   if (props.listType == "1") {
-    store.dispatch("Getnews");
+    useLazyData(news, "Getnews");
     list.value = store.state.home.NewList;
   } else if (props.listType == "2") {
-    store.dispatch("GetHot");
+    useLazyData(news, "GetHot");
     list.value = store.state.home.HotList;
   }
 });
@@ -157,6 +160,7 @@ onMounted(() => {
         }
       }
       &:hover {
+        cursor: pointer;
         position: relative;
         top: -1px;
         box-shadow: 10px 10px 15px #ccc;

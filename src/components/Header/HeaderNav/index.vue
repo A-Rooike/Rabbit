@@ -1,14 +1,25 @@
 <template>
   <ul class="navs">
-    <li class="home"><RouterLink to="/">首页</RouterLink></li>
+    <li class="home">
+      <RouterLink to="/">首页</RouterLink>
+    </li>
 
-    <li v-for="item in CategoryList" :key="item.id">
+    <li
+      v-for="item in CategoryList"
+      :key="item.id"
+    >
       <a href="#">{{ item.name }}</a>
       <div class="layer">
         <ul>
-          <li v-for="items in item.children" :key="items.id">
+          <li
+            v-for="items in item.children"
+            :key="items.id"
+          >
             <a href="#">
-              <img :src="items.picture" alt="" />
+              <img
+                :src="items.picture"
+                alt=""
+              />
               <p>{{ items.name }}</p>
             </a>
           </li>
@@ -30,7 +41,7 @@ onMounted(() => {
 </script>
 
 <style lang='less' scoped>
-@import "../../../../assets/style/variables";
+@import "../../../assets/style/variables";
 .navs {
   width: 820px;
   display: flex;

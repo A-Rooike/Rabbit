@@ -7,7 +7,7 @@ const category = {
   mutations: {
     GETALLCATEGORY(state, data) {
       state.CategoryList = data
-
+      
     }
   },
   actions: {

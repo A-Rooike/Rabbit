@@ -2,12 +2,22 @@
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <li>
-          <a href="javascript:;"><i class="iconfont icon-user"></i>周杰伦</a>
+        <li v-if="userInfo.token">
+          <a href="javascript:;"><i class="iconfont icon-user"></i>{{userInfo.account}}</a>
         </li>
-        <li><a href="javascript:;">退出登录</a></li>
-        <li><a href="javascript:;">请先登录</a></li>
-        <li><a href="javascript:;">免费注册</a></li>
+        <li><a
+            href="javascript:;"
+            v-if="!userInfo.token"
+          >请先登录</a></li>
+        <li><a
+            href="javascript:;"
+            v-if="userInfo.token"
+          >退出登录</a></li>
+
+        <li><a
+            href="javascript:;"
+            v-if="!userInfo.token"
+          >免费注册</a></li>
         <li><a href="javascript:;">我的订单</a></li>
         <li><a href="javascript:;">会员中心</a></li>
         <li><a href="javascript:;">帮助中心</a></li>
@@ -21,7 +31,8 @@
 </template>
 
 <script setup>
-import {} from "vue";
+import { onMounted, ref } from "vue";
+let userInfo = ref(JSON.parse(localStorage.getItem("userInfo")));
 </script>
 
 <style lang='less' scoped>

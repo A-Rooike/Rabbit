@@ -11,6 +11,20 @@ const routes = [
     name: '首页',
     component: () => import('@/views/home/index')
   },
+  {
+    path: '/login',
+    name: '登录',
+    component: () => import('@/views/login/index'),
+    meta: {
+      showTop: false
+    }
+  },
+  {
+    path: '/category',
+    name: '分类',
+    component: () => import('@/views/category/index'),
+  }
+
 ]
 
 const router = createRouter({

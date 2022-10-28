@@ -1,14 +1,22 @@
 <template>
   <header class="app-header">
     <div class="container">
-      <h1 class="logo"><RouterLink to="/">小兔鲜</RouterLink></h1>
+      <h1 class="logo">
+        <RouterLink to="/">小兔鲜</RouterLink>
+      </h1>
       <HeaderNav />
       <div class="search">
         <i class="iconfont icon-search"></i>
-        <input type="text" placeholder="搜一搜" />
+        <input
+          type="text"
+          placeholder="搜一搜"
+        />
       </div>
       <div class="cart">
-        <a class="curr" href="#">
+        <a
+          class="curr"
+          href="#"
+        >
           <i class="iconfont icon-cart"></i><em>2</em>
         </a>
       </div>
@@ -21,7 +29,7 @@ import HeaderNav from "./HeaderNav/index";
 </script>
 
 <style scoped lang='less'>
-@import "../../../assets/style/variables";
+@import "../../assets/style/variables";
 .app-header {
   background: #fff;
 
@@ -36,7 +44,7 @@ import HeaderNav from "./HeaderNav/index";
       height: 132px;
       width: 100%;
       text-indent: -9999px;
-      background: url(../../../assets/images/logo.png) no-repeat center 18px /
+      background: url(../../assets/images/logo.png) no-repeat center 18px /
         contain;
     }
   }

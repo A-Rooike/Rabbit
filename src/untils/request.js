@@ -4,6 +4,11 @@ const server = axios.create({
   timeout: 5000
 })
 server.interceptors.request.use((config) => {
+  //判断是否登录
+  let userInfo = JSON.parse(localStorage.getItem('userInfo')) || {}
+  if (userInfo.token) {
+    config.headers.Authorization = `Bearer ${userInfo.token}`
+  }
   return config
 })
 
