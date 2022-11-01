@@ -9,21 +9,28 @@ const home = {
   },
   mutations: {
     GETNEWS(state, data) {
-      // state.NewList = data
+      state.NewList.length = 0
       state.NewList.push(...data)
     },
     GETHOT(state, data) {
+      state.HotList.length = 0
+
       state.HotList.push(...data)
     },
     GETBRAND(state, data) {
-      state.BrandList.push(...data)
+      state.BrandList = data
+
+      // state.BrandList.push(...data)
     },
 
     GETGOODS(state, data) {
-      state.GoodsList.push(...data)
+      state.GoodsList = data
+
+      // state.GoodsList.push(...data)
     },
     GETSPECIAL(state, data) {
-      state.SpecialList.push(...data)
+      state.SpecialList = data
+      // state.SpecialList.push(...data)
     },
   },
   actions: {

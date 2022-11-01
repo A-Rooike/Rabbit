@@ -23,6 +23,13 @@ const routes = [
     path: '/category',
     name: '分类',
     component: () => import('@/views/category/index'),
+    children: [
+      {
+        path: 'sub',
+        name: '二级分类',
+        component: () => import('@/views/category/sub/index')
+      }
+    ]
   }
 
 ]

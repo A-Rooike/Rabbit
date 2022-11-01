@@ -1,5 +1,8 @@
 <template>
-  <div class="special" ref="special">
+  <div
+    class="special"
+    ref="special"
+  >
     <div class="container">
       <div class="header">
         <div class="header_left">
@@ -10,10 +13,20 @@
           <i class="iconfont icon-angle-right"></i>
         </div>
       </div>
-      <div class="special-list" ref="homeSpecial">
-        <div class="special-item" v-for="item in list" :key="item.id">
+      <div
+        class="special-list"
+        ref="homeSpecial"
+      >
+        <div
+          class="special-item"
+          v-for="item in list"
+          :key="item.id"
+        >
           <RouterLink to="/">
-            <img :src="item.cover" alt />
+            <img
+              :src="item.cover"
+              alt
+            />
             <div class="meta">
               <p class="title">
                 <span class="top ellipsis">{{ item.title }}</span>
@@ -23,15 +36,9 @@
             </div>
           </RouterLink>
           <div class="foot">
-            <span class="like"
-              ><i class="iconfont icon-hart1"></i>{{ item.collectNum }}</span
-            >
-            <span class="view"
-              ><i class="iconfont icon-see"></i>{{ item.viewNum }}</span
-            >
-            <span class="reply"
-              ><i class="iconfont icon-message"></i>{{ item.replyNum }}</span
-            >
+            <span class="like"><i class="iconfont icon-hart1"></i>{{ item.collectNum }}</span>
+            <span class="view"><i class="iconfont icon-see"></i>{{ item.viewNum }}</span>
+            <span class="reply"><i class="iconfont icon-message"></i>{{ item.replyNum }}</span>
           </div>
         </div>
       </div>
@@ -40,12 +47,12 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useStore } from "vuex";
 import { useLazyData } from "@/hooks/index";
 const store = useStore();
 const special = ref(null);
-const list = store.state.home.SpecialList;
+const list = computed(() => store.state.home.SpecialList);
 onMounted(() => {
   useLazyData(special, "GetSpecial");
 });

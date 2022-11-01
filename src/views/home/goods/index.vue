@@ -1,21 +1,35 @@
 <template>
-  <div class="goods" ref="goods">
+  <div
+    class="goods"
+    ref="goods"
+  >
     <div class="container">
-      <div class="list" v-for="item in list" :key="item.id">
-        <div class="head" data-v-39dda62a="">
+      <div
+        class="list"
+        v-for="item in list"
+        :key="item.id"
+      >
+        <div
+          class="head"
+          data-v-39dda62a=""
+        >
           <h3 data-v-39dda62a="">{{ item.name }}</h3>
           <div class="sub">
-            <a v-for="child in item.children" :key="child.id">{{
+            <a
+              v-for="child in item.children"
+              :key="child.id"
+            >{{
               child.name
             }}</a>
           </div>
-          <a class="xtx-more"
-            ><span>查看全部</span><i class="iconfont icon-angle-right"></i
-          ></a>
+          <a class="xtx-more"><span>查看全部</span><i class="iconfont icon-angle-right"></i></a>
         </div>
         <div class="box">
           <a class="cover">
-            <img alt="" v-lazy="item.picture" />
+            <img
+              alt=""
+              v-lazy="item.picture"
+            />
             <strong class="label">
               <span>{{ item.name }}馆</span>
               <span>{{ item.saleInfo }}</span>
@@ -23,11 +37,18 @@
           </a>
 
           <ul class="goods-list">
-            <li v-for="goods in item.goods" :key="goods.id">
+            <li
+              v-for="goods in item.goods"
+              :key="goods.id"
+            >
               <div class="goods-item">
-                <a href="#/product/3844013" class="image"
-                  ><img alt="" v-lazy="goods.picture"
-                /></a>
+                <a
+                  href="#/product/3844013"
+                  class="image"
+                ><img
+                    alt=""
+                    v-lazy="goods.picture"
+                  /></a>
                 <p class="name ellipsis-2">{{ goods.name }}</p>
                 <p class="desc ellipsis">{{ goods.desc }}</p>
                 <p class="price">¥{{ goods.price }}</p>
@@ -36,8 +57,7 @@
                     aria-current="page"
                     href="#/"
                     class="router-link-active router-link-exact-active"
-                    ><span>找相似</span><span>发现现多宝贝 &gt;</span></a
-                  >
+                  ><span>找相似</span><span>发现现多宝贝 &gt;</span></a>
                 </div>
               </div>
             </li>
@@ -49,14 +69,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 import Skeleton from "@/components/Skeleton/index";
 import { useLazyData } from "@/hooks/index";
 
 const store = useStore();
 const goods = ref(null);
-const list = store.state.home.GoodsList;
+const list = computed(() => store.state.home.GoodsList);
 onMounted(() => {
   useLazyData(goods, "GetGoods");
   // store.dispatch("GetGoods");

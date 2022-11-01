@@ -7,15 +7,17 @@
     <li
       v-for="item in CategoryList"
       :key="item.id"
+      @click="Tocategory(item)"
     >
-      <a href="#">{{ item.name }}</a>
+      <a>{{ item.name }}</a>
       <div class="layer">
         <ul>
           <li
             v-for="items in item.children"
             :key="items.id"
+            @click.stop="Tosub(items)"
           >
-            <a href="#">
+            <a>
               <img
                 :src="items.picture"
                 alt=""
@@ -32,9 +34,27 @@
 <script setup>
 import { onMounted, ref, computed } from "vue";
 import { useStore, mapState } from "vuex";
+import { useRouter } from "vue-router";
 const store = useStore();
-
+const router = useRouter();
 const CategoryList = computed(() => store.state.category.CategoryList);
+const Tocategory = (item) => {
+  router.push({
+    path: "/category",
+    query: {
+      id: item.id,
+    },
+  });
+};
+const Tosub = (item) => {
+  // console.log(item);
+  router.push({
+    path: "/category/sub",
+    query: {
+      id: item.id,
+    },
+  });
+};
 onMounted(() => {
   store.dispatch("GetAllCategory");
 });
@@ -61,6 +81,7 @@ onMounted(() => {
       display: inline-block;
     }
     &:hover {
+      cursor: pointer;
       > a {
         color: @xtxColor;
         border-bottom: 1px solid @xtxColor;

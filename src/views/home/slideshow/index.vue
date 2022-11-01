@@ -1,4 +1,5 @@
 <template>
+
   <div class="xtx-carousel">
     <ul class="carousel-body">
       <li class="carousel-item fade">
@@ -10,14 +11,19 @@
         </RouterLink>
       </li>
     </ul>
-    <a href="javascript:;" class="carousel-btn prev"
-      ><i class="iconfont icon-angle-left"></i
-    ></a>
-    <a href="javascript:;" class="carousel-btn next"
-      ><i class="iconfont icon-angle-right"></i
-    ></a>
+    <a
+      href="javascript:;"
+      class="carousel-btn prev"
+    ><i class="iconfont icon-angle-left"></i></a>
+    <a
+      href="javascript:;"
+      class="carousel-btn next"
+    ><i class="iconfont icon-angle-right"></i></a>
     <div class="carousel-indicator">
-      <span v-for="i in 5" :key="i"></span>
+      <span
+        v-for="i in 5"
+        :key="i"
+      ></span>
     </div>
   </div>
 </template>
@@ -92,7 +98,7 @@ export default {
       opacity: 0;
       transition: all 0.5s;
       &.prev {
-        left: 270px;
+        left: 20px;
       }
       &.next {
         right: 20px;

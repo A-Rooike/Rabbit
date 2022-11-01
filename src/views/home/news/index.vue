@@ -1,32 +1,66 @@
 <template>
-  <div class="news" ref="news">
+  <div
+    class="news"
+    ref="news"
+  >
     <div class="container">
       <div class="header">
         <div class="header_left">
           <p class="fw">{{ title }}</p>
           <p class="fws">{{ tips }}</p>
         </div>
-        <div class="header_right" v-if="showAll">
+        <div
+          class="header_right"
+          v-if="showAll"
+        >
           查看全部
           <i class="iconfont icon-angle-right"></i>
         </div>
       </div>
-      <div class="main" v-if="list.length != 0">
-        <div class="item" v-for="item in list" :key="item.id">
-          <img :src="item.picture" alt="" class="item_img" />
-          <div class="item_bottom" v-if="listType == '1'">
+      <div
+        class="main"
+        v-if="list.length != 0"
+      >
+        <div
+          class="item"
+          v-for="item in list"
+          :key="item.id"
+        >
+          <img
+            :src="item.picture"
+            alt=""
+            class="item_img"
+          />
+          <div
+            class="item_bottom"
+            v-if="listType == '1'"
+          >
             <div class="title">{{ item.name }}</div>
             <div class="title price">¥{{ item.price }}</div>
           </div>
-          <div class="item_bottom" v-else>
+          <div
+            class="item_bottom"
+            v-else
+          >
             <div class="title">{{ item.title }}</div>
             <div class="title desc">{{ item.alt }}</div>
           </div>
         </div>
       </div>
-      <div class="main" v-else>
-        <div v-for="item in 4" :key="item">
-          <Skeleton bg="#e4e4e4" width="306px" height="306px" animated />
+      <div
+        class="main"
+        v-else
+      >
+        <div
+          v-for="item in 4"
+          :key="item"
+        >
+          <Skeleton
+            bg="#e4e4e4"
+            width="306px"
+            height="306px"
+            animated
+          />
           <Skeleton
             bg="#e4e4e4"
             width="160px"

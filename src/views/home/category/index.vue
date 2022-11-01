@@ -1,9 +1,15 @@
 <template>
   <div class="home-category">
     <ul class="menu">
-      <li v-for="(item, index) in store.getters.CategoryLeft" :key="index">
+      <li
+        v-for="(item, index) in store.getters.CategoryLeft"
+        :key="index"
+      >
         <div v-if="item.carName[1] != ''">
-          <a v-for="item1 in item.carName" :key="item1">{{ item1 }}</a>
+          <a
+            v-for="item1 in item.carName"
+            :key="item1"
+          >{{ item1 }}</a>
         </div>
         <div v-else>
           <Skeleton
@@ -18,14 +24,24 @@
             style="margin-right: 5px"
             bg="rgba(255,255,255,0.2)"
           />
-          <Skeleton width="60px" height="18px" bg="rgba(255,255,255,0.2)" />
+          <Skeleton
+            width="60px"
+            height="18px"
+            bg="rgba(255,255,255,0.2)"
+          />
         </div>
         <div class="layer">
           <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
           <ul>
-            <li v-for="item2 in item.goods" :key="item2.id">
+            <li
+              v-for="item2 in item.goods"
+              :key="item2.id"
+            >
               <RouterLink to="/">
-                <img :src="item2.picture" alt="" />
+                <img
+                  :src="item2.picture"
+                  alt=""
+                />
                 <div class="info">
                   <p class="name ellipsis-2">
                     {{ item2.name }}

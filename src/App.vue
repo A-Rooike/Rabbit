@@ -5,13 +5,14 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onBeforeMount } from "vue";
 import { useRouter } from "vue-router";
 import NavBar from "@/components/NavBar/index";
 import Footer from "@/components/Footer/index";
 const router = useRouter();
-onMounted(() => {
-  console.log(router);
+onBeforeMount(() => {
+  console.log(document.documentElement.scrollTop);
+  // document.documentElement.scrollTop = 0;
 });
 </script>
 

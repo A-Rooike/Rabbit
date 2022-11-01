@@ -1,5 +1,8 @@
 <template>
-  <div class="hotbrand" ref="brand">
+  <div
+    class="hotbrand"
+    ref="brand"
+  >
     <div class="container">
       <div class="header">
         <div class="header_left">
@@ -28,7 +31,10 @@
             :key="i"
             :class="{ remove: index == 1, num: index == 0 }"
           >
-            <img :src="i.picture" alt="" />
+            <img
+              :src="i.picture"
+              alt=""
+            />
           </li>
         </ul>
       </div>
@@ -37,14 +43,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 import { useLazyData } from "@/hooks/index";
 
 const store = useStore();
 const brand = ref(null);
 const index = ref(0);
-const list = ref(store.state.home.BrandList);
+const list = computed(() => store.state.home.BrandList);
 onMounted(() => {
   useLazyData(brand, "GetBrand");
 });
