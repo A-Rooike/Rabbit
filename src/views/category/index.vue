@@ -35,7 +35,7 @@
 import { onMounted, computed, watch } from "vue";
 import Header from "@/components/Header";
 import Sticky from "@/components/Sticky";
-import Bread from "./compoents/bread";
+import Bread from "@/components/Bread";
 import Slideshow from "../home/slideshow";
 import GoodsDetail from "./compoents/goodsDeatil";
 import { useStore } from "vuex";

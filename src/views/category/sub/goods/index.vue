@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div class="goods-list">
+    <div
+      class="goods-list"
+      v-if="list && !contnetloading"
+    >
       <div class="sub-sort">
         <div class="sort"><a class="active">默认排序</a><a class="">最新商品</a><a class="">最高人气</a><a class="">评论最多</a><a> 价格排序 <i class="arrow up"></i><i class="arrow down"></i></a></div>
         <div class="check">
@@ -12,11 +15,12 @@
         <li
           v-for="item in list.items"
           :key="item.id"
+          @click="Toproduct(item)"
         >
           <a class="goods-item">
             <img
               alt=""
-              :src="item.picture"
+              v-lazy="item.picture"
             >
             <p class="name ellipsis">{{item.name}}</p>
             <p class="desc ellipsis">{{item.desc}}</p>
@@ -39,6 +43,15 @@
         ><span class="img"></span><span class="text">亲，没有更多了</span></div>
       </div>
     </div>
+    <div
+      class="contentloading"
+      v-else
+    >
+      <img
+        src="@/assets/images/loading.gif"
+        alt=""
+      >
+    </div>
   </div>
 </template>
 
@@ -54,6 +67,7 @@ const store = useStore();
 const router = useRouter();
 const categoryId = computed(() => router.currentRoute.value.query.id);
 const loaing = ref(null);
+const contnetloading = ref(false);
 const params = ref({
   categoryId: categoryId.value,
   page: 1,
@@ -61,15 +75,22 @@ const params = ref({
 });
 const loading = ref(false);
 const nodata = ref(false);
+const list = ref({});
 const getmore = () => {
-  console.log(6666);
   params.value.page = params.value.page + 1;
+};
+const Toproduct = (item) => {
+  router.push({
+    path: "/product",
+    query: {
+      id: item.id,
+    },
+  });
 };
 watch(
   params,
   async (newValue, oldValue) => {
     loading.value = true;
-
     let res = await findGoodsDetail(params.value);
     if (res.msg == "操作成功") {
       if (res.result.items.length != 0) {
@@ -84,15 +105,25 @@ watch(
   },
   { deep: true }
 );
-const list = ref({});
+const getList = async () => {
+  contnetloading.value = true;
+  let res = await findGoodsDetail(params.value);
+  if (res.msg == "操作成功") {
+    contnetloading.value = false;
+    list.value = res.result;
+  }
+};
+watch(
+  categoryId,
+  (newValue, oldValue) => {
+    getList();
+  },
+  { deep: true }
+);
+
 onMounted(async () => {
   if (router.currentRoute.value.name == "二级分类") {
-    loading.value = true;
-    let res = await findGoodsDetail(params.value);
-    if (res.msg == "操作成功") {
-      loading.value = false;
-      list.value = res.result;
-    }
+    getList();
     getlist(loaing, getmore);
   }
 });
@@ -170,6 +201,10 @@ onMounted(async () => {
         .name {
           font-size: 16px;
         }
+        .price {
+          color: #cf4444;
+          font-size: 20px;
+        }
         p {
           padding-top: 10px;
         }
@@ -207,6 +242,17 @@ onMounted(async () => {
       color: #999;
       font-size: 16px;
     }
+  }
+}
+
+.contentloading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  img {
+    width: 44px;
+    height: 44px;
   }
 }
 </style>

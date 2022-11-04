@@ -11,7 +11,7 @@ import NavBar from "@/components/NavBar/index";
 import Footer from "@/components/Footer/index";
 const router = useRouter();
 onBeforeMount(() => {
-  console.log(document.documentElement.scrollTop);
+  // console.log(document.documentElement.scrollTop);
   // document.documentElement.scrollTop = 0;
 });
 </script>

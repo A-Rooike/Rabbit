@@ -30,6 +30,11 @@ const routes = [
         component: () => import('@/views/category/sub/index')
       }
     ]
+  },
+  {
+    path: '/product',
+    name: '商品详情',
+    component: () => import("@/views/product/index.vue")
   }
 
 ]

@@ -22,7 +22,7 @@ export const useLazyData = (target, action) => {
   )
 }
 
-export const getlist = (target, action) => {
+export const getlist = (target, action, params) => {
   // 需要
   // 1. 被观察的对象
   // 2. 不同的API函数
@@ -35,7 +35,7 @@ export const getlist = (target, action) => {
       if (isIntersecting) {
         stop()
         // 请求vux获取数据
-        action()
+        action(params)
       }
     }
   )

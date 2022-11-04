@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div class="sub-filter">
+    <div
+      class="sub-filter"
+      v-if="list.brands && !loaind"
+    >
       <div
         class="item"
         v-for="item in list.brands"
@@ -36,16 +39,60 @@
       </div>
 
     </div>
+    <div
+      class="sub-filter"
+      v-else
+    >
+      <Skeleton
+        width='400px'
+        height='24px'
+        class="skele"
+      />
+      <Skeleton
+        width='600px'
+        height='24px'
+        class="skele"
+      />
+      <Skeleton
+        width='700px'
+        height='24px'
+        class="skele"
+      />
+      <Skeleton
+        width='800px'
+        height='24px'
+        class="skele"
+      />
+    </div>
+
   </div>
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import { onMounted, computed, watch, ref } from "vue";
 import { useStore } from "vuex";
+import Skeleton from "@/components/Skeleton/index";
+import { useRouter } from "vue-router";
 
 const store = useStore();
+const router = useRouter();
+const loaind = ref(false);
 const list = computed(() => store.state.category.TwoCategoryList);
-onMounted(() => {});
+const TwoId = computed(() => router.currentRoute.value.query.id);
+watch(TwoId, (newValue, oldValue) => {
+  if (newValue && router.currentRoute.value.name == "二级分类") {
+    loaind.value = true;
+  }
+});
+watch(list, (newValue, oldValue) => {
+  if (newValue && router.currentRoute.value.name == "二级分类") {
+    loaind.value = false;
+  }
+});
+
+onMounted(() => {
+  console.log(1);
+});
 </script>
 
 <style lang='less' scoped>
@@ -82,6 +129,10 @@ onMounted(() => {});
         white-space: nowrap;
       }
     }
+  }
+  .skele {
+    display: block;
+    margin-bottom: 20px;
   }
 }
 </style>
